@@ -4,23 +4,28 @@
 
 <h1>Tags</h1>
 
-<a href="{% url 'todo:tag-create' %}">Add Tag</a>
+<a class="btn btn-add" href="{% url 'todo:tag-create' %}">+ Add Tag</a>
 
-<table border="1">
-<tr>
-    <th>Name</th>
-    <th>Actions</th>
-</tr>
+<div class="card">
+<table class="tag-table">
+    <tr>
+        <th class="col-name">Name</th>
+        <th class="col-actions">Actions</th>
+    </tr>
 
-{% for tag in tags %}
-<tr>
-    <td>{{ tag.name }}</td>
-    <td>
-        <a href="{% url 'todo:tag-update' tag.id %}">Update</a>
-        <a href="{% url 'todo:tag-delete' tag.id %}">Delete</a>
-    </td>
-</tr>
-{% endfor %}
+    {% for tag in tags %}
+    <tr>
+        <td style="text-align: center" class="col-name">{{ tag.name }}</td>
+
+        <td class="col-actions">
+            <div style="text-align: center" class="actions">
+                <a class="btn btn-edit" href="{% url 'todo:tag-update' tag.id %}">Update</a>
+                <a class="btn btn-delete" href="{% url 'todo:tag-delete' tag.id %}">Delete</a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
 </table>
+</div>
 
 {% endblock %}

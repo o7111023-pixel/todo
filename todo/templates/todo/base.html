@@ -7,17 +7,12 @@
 
 <div style="display:flex;">
 
-    <!-- Sidebar -->
-    <div style="width:200px; padding:10px; border-right:1px solid #ccc;">
+    <div style="width:200px; border-right:1px solid gray; padding:10px;">
         <h3>Menu</h3>
-
-        <ul>
-            <li><a href="{% url 'todo:task-list' %}">Home</a></li>
-            <li><a href="{% url 'todo:tag-list' %}">Tags</a></li>
-        </ul>
+        <a href="{% url 'todo:task-list' %}">Home</a><br>
+        <a href="{% url 'todo:tag-list' %}">Tags</a>
     </div>
 
-    <!-- Content -->
     <div style="padding:20px; flex:1;">
         {% block content %}{% endblock %}
     </div>

@@ -1,0 +1,16 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+
+<h2>Tag Form</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="{% url 'todo:tag-list' %}">Back</a>
+
+{% endblock %}

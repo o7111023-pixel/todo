@@ -4,40 +4,37 @@
 
 <h1>Tasks</h1>
 
-<a href="#">Add Task</a>
+<a href="{% url 'todo:task-create' %}">Add Task</a>
 
 <ul>
-    {% for task in tasks %}
-        <li>
-            <p><b>{{ task.content }}</b></p>
-            <p>Created: {{ task.created_at }}</p>
+{% for task in tasks %}
+    <li>
+        <h3>{{ task.content }}</h3>
 
-            {% if task.deadline %}
-                <p>Deadline: {{ task.deadline }}</p>
-            {% endif %}
+        <p>Created: {{ task.created_at }}</p>
+        <p>Deadline: {{ task.deadline }}</p>
+        <p>Done: {{ task.is_done }}</p>
 
-            <p>Status: {{ task.is_done }}</p>
+        <p>
+            Tags:
+            {% for tag in task.tags.all %}
+                {{ tag.name }}
+            {% empty %}
+                no tags
+            {% endfor %}
+        </p>
 
-            <p>
-                Tags:
-                {% for tag in task.tags.all %}
-                    {{ tag.name }}
-                {% empty %}
-                    no tags
-                {% endfor %}
-            </p>
+        <a href="{% url 'todo:task-update' task.id %}">Update</a>
+        <a href="{% url 'todo:task-delete' task.id %}">Delete</a>
 
-            <a href="#">Update</a> |
-            <a href="#">Delete</a> |
-
-            {% if task.is_done %}
-                <a href="#">Undo</a>
-            {% else %}
-                <a href="#">Complete</a>
-            {% endif %}
-        </li>
-        <hr>
-    {% endfor %}
+        {% if task.is_done %}
+            <a href="{% url 'todo:task-toggle' task.id %}">Undo</a>
+        {% else %}
+            <a href="{% url 'todo:task-toggle' task.id %}">Complete</a>
+        {% endif %}
+    </li>
+    <hr>
+{% endfor %}
 </ul>
 
 {% endblock %}

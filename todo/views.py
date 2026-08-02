@@ -2,10 +2,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 
-from .models import Task, Tag
+from todo.models import Task, Tag
 
-
-# ---------------- TASK ----------------
 
 class TaskListView(ListView):
     model = Task

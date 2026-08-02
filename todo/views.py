@@ -2,10 +2,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 
-from .models import Task, Tag
+from todo.models import Task, Tag
 
-
-# ---------------- TASK ----------------
 
 class TaskListView(ListView):
     model = Task
@@ -13,7 +11,12 @@ class TaskListView(ListView):
     context_object_name = "tasks"
 
     def get_queryset(self):
-        return Task.objects.prefetch_related("tags").order_by("is_done", "-created_at")
+        return Task.objects.prefetch_related(
+            "tags"
+        ).order_by(
+            "is_done",
+            "-created_at",
+        )
 
 
 class TaskCreateView(CreateView):

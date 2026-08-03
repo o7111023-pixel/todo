@@ -1,7 +1,13 @@
 from django.urls import path
 
 from todo import views
-from todo.views import TaskCreateView, TaskListView, TagListView
+from todo.views import (
+    TaskCreateView,
+    TaskListView,
+    TagListView,
+    TaskToggleView
+)
+
 
 app_name = "todo"
 
@@ -21,7 +27,7 @@ urlpatterns = [
     ),
     path(
         "tasks/<int:pk>/toggle/",
-        views.task_toggle,
+        TaskToggleView.as_view(),
         name="task-toggle",
     ),
     path("tags/create/", views.TagCreateView.as_view(), name="tag-create"),
